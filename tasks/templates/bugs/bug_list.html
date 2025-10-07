@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Bug Reports</h1>
+<a href="{% url 'bug-create' %}">Report Bug</a>
+
+<ul>
+    {% for bug in bugs %}
+    <li>
+        <a href="{% url 'bug-detail' bug.pk %}">{{ bug.title }}</a>
+        ({{ bug.get_severity_display }} - {{ bug.get_status_display }})
+    </li>
+    {% empty %}
+    <li>No bugs reported yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

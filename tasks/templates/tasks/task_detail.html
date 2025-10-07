@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ object.title }}</h1>
+    <p>{{ object.description }}</p>
+    <p>Status: {{ object.get_status_display }}</p>
+    <p>Priority: {{ object.get_priority_display }}</p>
+    <p>Assigned to: {{ object.assigned_to }}</p>
+
+    {% if user == object.owner %}
+        <a href="{% url 'task-update' object.pk %}"> Edit</a>
+        <a href="{% url 'task-delete' object.pk %}"> Delete</a>
+    {% endif %}
+        <a href="{% url 'task-list' %}"> Back to list</a>
+{% endblock %}

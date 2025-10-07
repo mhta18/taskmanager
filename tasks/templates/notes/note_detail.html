@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ object.title }}</h1>
+    <p>{{ object.description }}</p>
+    <p>Type: {{ object.get_note_type_display }}</p>
+    <p>Tags: {{ object.tags }}</p>
+    {% if object.is_pinned %}<p>Pinned</p>{% endif %}
+
+    {% if user == object.owner %}
+        <a href="{% url 'note-update' object.pk %}"> Edit</a>
+        <a href="{% url 'note-delete' object.pk %}"> Delete</a>
+    {% endif %}
+        <a href="{% url 'note-list' %}">⬅ Back to list</a>
+{% endblock %}

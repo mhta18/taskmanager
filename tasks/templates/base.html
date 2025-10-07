@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Project{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <h1><a href="/">Task & Notes App</a></h1>
+        <nav>
+            <div>
+                <a href="{% url 'task-list' %}"> Tasks</a>
+                <a href="{% url 'bug-list' %}"> Bug Reports</a>
+                <a href="{% url 'note-list' %}"> Notes</a>
+            </div>
+
+        {% if user.is_authenticated %}
+            <span> <strong> Hello, {{ user.username }}</strong> </span>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit"> Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}"> Login</a>
+        {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ year|default:2024 }} - Built with Django</p>
+    </footer>
+</body>
+
+</html>
