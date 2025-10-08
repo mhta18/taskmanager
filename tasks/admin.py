@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.models import User  
 from .models import Task, BugReport, Note
 
-# Common admin configuration using mixins
 class BaseItemAdminMixin:
     """Mixin with common admin configuration"""
     list_display = ('title', 'owner', 'created_at', 'updated_at')

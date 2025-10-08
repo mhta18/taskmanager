@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 
 class BaseItem(models.Model):
-    """Abstract base model for common fields"""
     title = models.CharField(max_length=200, blank=False, null=False)
     description = models.TextField(blank=False, null=False)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="%(class)s_items")
@@ -11,10 +10,10 @@ class BaseItem(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        abstract = True  # No DB table for BaseItem
+        abstract = True 
 
 
-class Task(BaseItem):  # 👈 now inherits
+class Task(BaseItem):  
     STATUS_CHOICES = [
         ('todo', 'To Do'),
         ('in_progress', 'In Progress'),
@@ -42,7 +41,7 @@ class Task(BaseItem):  # 👈 now inherits
         return f"{self.title} ({self.status})"
 
 
-class BugReport(BaseItem):  # 👈 now inherits
+class BugReport(BaseItem): 
     SEVERITY_CHOICES = [
         ('low', 'Low'),
         ('medium', 'Medium'),
@@ -67,7 +66,7 @@ class BugReport(BaseItem):  # 👈 now inherits
         return f"Bug: {self.title} ({self.severity})"
 
 
-class Note(BaseItem):  # 👈 now inherits
+class Note(BaseItem): 
     NOTE_TYPES = [
         ('general', 'General'),
         ('meeting', 'Meeting'),

@@ -12,7 +12,7 @@ class BaseItemListCreateAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = self.model.objects.all()
-        query = self.request.GET.get("q")  # ?q=search
+        query = self.request.GET.get("q") 
         if query:
             queryset = queryset.filter(
                 Q(title__icontains=query) | Q(description__icontains=query)
