@@ -7,14 +7,7 @@ class BaseItemSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ['id', 'title', 'description', 'created_at', 'updated_at']
         read_only_fields = ['created_at', 'updated_at']
-
-class TaskSerializer(BaseItemSerializer):
-    class Meta(BaseItemSerializer.Meta):
-        model = Task
-        fields = BaseItemSerializer.Meta.fields + ['status', 'priority', 'assigned_to', 'owner']
-        read_only_fields = BaseItemSerializer.Meta.read_only_fields + ['owner']
-
-        validators = [
+    validators = [
             UniqueTogetherValidator(
                 queryset=Task.objects.all(),
                 fields=['owner', 'title'],
@@ -26,6 +19,14 @@ class TaskSerializer(BaseItemSerializer):
         if len(value) < 3:
             raise serializers.ValidationError("Task title must be at least 3 characters long.")
         return value
+
+class TaskSerializer(BaseItemSerializer):
+    class Meta(BaseItemSerializer.Meta):
+        model = Task
+        fields = BaseItemSerializer.Meta.fields + ['status', 'priority', 'assigned_to', 'owner']
+        read_only_fields = BaseItemSerializer.Meta.read_only_fields + ['owner']
+
+
 
 class BugReportSerializer(BaseItemSerializer):
     class Meta(BaseItemSerializer.Meta):
