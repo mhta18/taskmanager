@@ -17,7 +17,7 @@ from .views import (
 urlpatterns = [
     path("", views.home,name="home"),
     # --------------------
-    # 🔹 Task URLs
+    #  Task URLs
     # --------------------
     path("tasks/", TaskListView.as_view(), name="task-list"),
     path("tasks/create/", TaskCreateView.as_view(), name="task-create"),
@@ -26,7 +26,7 @@ urlpatterns = [
     path("tasks/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"),
 
     # --------------------
-    # 🔹 BugReport URLs
+    #  BugReport URLs
     # --------------------
     path("bugs/", BugReportListView.as_view(), name="bug-list"),
     path("bugs/create/", BugReportCreateView.as_view(), name="bug-create"),
@@ -35,7 +35,7 @@ urlpatterns = [
     path("bugs/<int:pk>/delete/", BugReportDeleteView.as_view(), name="bug-delete"),
 
     # --------------------
-    # 🔹 Note URLs
+    #  Note URLs
     # --------------------
     path("notes/", NoteListView.as_view(), name="note-list"),
     path("notes/create/", NoteCreateView.as_view(), name="note-create"),
@@ -44,12 +44,12 @@ urlpatterns = [
     path("notes/<int:pk>/delete/", NoteDeleteView.as_view(), name="note-delete"),
 
     # --------------------
-    # 🔹 Search URL
+    #  Search URL
     # --------------------
     path("search/",  views.search_view , name="search"),
 
     # --------------------
-    # 🔹 API URLs
+    #  API URLs
     # --------------------
     path("tasks/", TaskListCreateAPIView.as_view(), name="api-task-list-create"),
     path("tasks/<int:pk>/", TaskRetrieveUpdateDestroyAPIView.as_view(), name="api-task-detail"),

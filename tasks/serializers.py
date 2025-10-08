@@ -4,7 +4,6 @@ from .models import Task, BugReport, Note
 
 
 class BaseItemSerializer(serializers.ModelSerializer):
-    """Base serializer for shared fields"""
     class Meta:
         fields = ['id', 'title', 'description', 'created_at', 'updated_at']
         read_only_fields = ['created_at', 'updated_at']
