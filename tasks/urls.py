@@ -1,5 +1,6 @@
 from django.urls import path
-from .api_views import TaskListCreateAPIView, TaskRetrieveUpdateDestroyAPIView
+from .api_views import (TaskListCreateAPIView, TaskRetrieveUpdateDestroyAPIView,BugReportListCreateAPIView, BugReportRetrieveUpdateDestroyAPIView,
+    NoteListCreateAPIView, NoteRetrieveUpdateDestroyAPIView)
 from . import views
 from .views import (
     TaskListView, TaskDetailView, TaskCreateView,
@@ -10,7 +11,7 @@ from django.urls import path
 from .views import (
     TaskListView, TaskDetailView, TaskCreateView, TaskUpdateView, TaskDeleteView,
     BugReportListView, BugReportDetailView, BugReportCreateView, BugReportUpdateView, BugReportDeleteView,
-    NoteListView, NoteDetailView, NoteCreateView, NoteUpdateView, NoteDeleteView,
+    NoteListView, NoteDetailView, NoteCreateView, NoteUpdateView, NoteDeleteView
 )
 
 urlpatterns = [
@@ -43,7 +44,21 @@ urlpatterns = [
     path("notes/<int:pk>/delete/", NoteDeleteView.as_view(), name="note-delete"),
 
     # --------------------
-    # 🔹 Search
+    # 🔹 Search URL
     # --------------------
     path("search/",  views.search_view , name="search"),
+
+    # --------------------
+    # 🔹 API URLs
+    # --------------------
+    path("tasks/", TaskListCreateAPIView.as_view(), name="api-task-list-create"),
+    path("tasks/<int:pk>/", TaskRetrieveUpdateDestroyAPIView.as_view(), name="api-task-detail"),
+
+ 
+    path("bugs/", BugReportListCreateAPIView.as_view(), name="api-bug-list-create"),
+    path("bugs/<int:pk>/", BugReportRetrieveUpdateDestroyAPIView.as_view(), name="api-bug-detail"),
+
+
+    path("notes/", NoteListCreateAPIView.as_view(), name="api-note-list-create"),
+    path("notes/<int:pk>/", NoteRetrieveUpdateDestroyAPIView.as_view(), name="api-note-detail"),
 ]
