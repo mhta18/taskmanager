@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Search Results for "{{ query }}"</h3>
+
+    {% if not notes and not tasks and not bugs %}
+    <p class="text-muted mt-3">No results found.</p>
+    {% endif %}
+
+    {% if notes %}
+    <h4 class="mt-4">Notes</h4>
+    <ul class="list-group mb-4">
+        {% for note in notes %}
+        <li class="list-group-item">
+            <a href="{% url 'note-detail' note.pk %}" class="text-decoration-none">
+                <strong>{{ note.title }}</strong>
+            </a>
+            <p class="mb-0 text-muted">{{ note.description|truncatechars:100 }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if tasks %}
+    <h4 class="mt-4">Tasks</h4>
+    <ul class="list-group mb-4">
+        {% for task in tasks %}
+        <li class="list-group-item">
+            <a href="{% url 'task-detail' task.pk %}" class="text-decoration-none">
+                <strong>{{ task.title }}</strong>
+            </a>
+            <p class="mb-0 text-muted">{{ task.description|truncatechars:100 }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if bugs %}
+    <h4 class="mt-4">Bug Reports</h4>
+    <ul class="list-group mb-4">
+        {% for bug in bugs %}
+        <li class="list-group-item">
+            <a href="{% url 'bug-detail' bug.pk %}" class="text-decoration-none">
+                <strong>{{ bug.title }}</strong>
+            </a>
+            <p class="mb-0 text-muted">{{ bug.description|truncatechars:100 }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}

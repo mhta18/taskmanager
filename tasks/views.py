@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Task, BugReport, Note
+from django.db.models import Q
 import logging
 
 
@@ -143,3 +144,28 @@ class NoteDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         note = self.get_object()
         return self.request.user == note.owner
+
+def search_view(request):
+    query = request.GET.get('q', '').strip()
+    notes = tasks = bugs = []
+
+    if query:
+        notes = Note.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+        tasks = Task.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+        bugs = BugReport.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)
+        )
+
+    context = {
+        'query': query,
+        'notes': notes,
+        'tasks': tasks,
+        'bugs': bugs,
+    }
+
+    logger.info(f"User '{request.user}' searched for '{query}'")
+    return render(request, 'search_results.html', context)

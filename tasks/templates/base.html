@@ -17,7 +17,12 @@
                 <a href="{% url 'bug-list' %}"> Bug Reports</a>
                 <a href="{% url 'note-list' %}"> Notes</a>
             </div>
-
+            <div>
+                <form method="GET" action="{% url 'search' %}" class="d-flex mb-3">
+                    <input type="text" name="q" class="form-control me-2" placeholder="Search notes, bugs, tasks...">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
         {% if user.is_authenticated %}
             <span> <strong> Hello, {{ user.username }}</strong> </span>
             <form action="{% url 'logout' %}" method="post" style="display:inline;">

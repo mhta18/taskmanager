@@ -41,4 +41,9 @@ urlpatterns = [
     path("notes/<int:pk>/", NoteDetailView.as_view(), name="note-detail"),
     path("notes/<int:pk>/update/", NoteUpdateView.as_view(), name="note-update"),
     path("notes/<int:pk>/delete/", NoteDeleteView.as_view(), name="note-delete"),
+
+    # --------------------
+    # 🔹 Search
+    # --------------------
+    path("search/",  views.search_view , name="search"),
 ]
