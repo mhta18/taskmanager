@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'taskmanager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -88,18 +88,12 @@ if 'PYTHONANYWHERE_DOMAIN' in os.environ:
     ALLOWED_HOSTS = ['mahtamira.pythonanywhere.com']
     STATIC_ROOT = '/home/mahtamira/taskmanager/static'
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join('/home/mahtamira/taskmanager', 'db.sqlite3'),
-        }
-    }
 
 else:
-    # Your local development settings
+    #local development settings
     DEBUG = True
     ALLOWED_HOSTS = []
-    
+
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
