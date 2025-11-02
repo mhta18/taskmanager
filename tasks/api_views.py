@@ -47,16 +47,11 @@ class TaskListCreateAPIView(BaseItemListCreateAPIView):
     serializer_class = TaskSerializer
     model = Task
 
-class TaskListCreateAPIView(BaseItemListCreateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-    model = Task
-
 class TaskRetrieveUpdateDestroyAPIView(BaseItemRetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     model = Task
-    
+
 class BugReportListCreateAPIView(BaseItemListCreateAPIView):
     queryset = BugReport.objects.all()
     serializer_class = BugReportSerializer
