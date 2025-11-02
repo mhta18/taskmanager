@@ -47,21 +47,16 @@ class TaskListCreateAPIView(BaseItemListCreateAPIView):
     serializer_class = TaskSerializer
     model = Task
 
-
-class TaskRetrieveUpdateDestroyAPIView(BaseItemRetrieveUpdateDestroyAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-
 class TaskListCreateAPIView(BaseItemListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     model = Task
 
-
 class TaskRetrieveUpdateDestroyAPIView(BaseItemRetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
-
+    model = Task
+    
 class BugReportListCreateAPIView(BaseItemListCreateAPIView):
     queryset = BugReport.objects.all()
     serializer_class = BugReportSerializer
@@ -71,6 +66,7 @@ class BugReportListCreateAPIView(BaseItemListCreateAPIView):
 class BugReportRetrieveUpdateDestroyAPIView(BaseItemRetrieveUpdateDestroyAPIView):
     queryset = BugReport.objects.all()
     serializer_class = BugReportSerializer
+    model = BugReport
 
 class NoteListCreateAPIView(BaseItemListCreateAPIView):
     queryset = Note.objects.all()
@@ -81,6 +77,7 @@ class NoteListCreateAPIView(BaseItemListCreateAPIView):
 class NoteRetrieveUpdateDestroyAPIView(BaseItemRetrieveUpdateDestroyAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+    model = Note
 
 
 
