@@ -17,7 +17,7 @@ def home(request):
 
 
 class BaseOwnerMixin(LoginRequiredMixin, UserPassesTestMixin):
-    """Ensures that only the owner can update/delete an object."""
+
     def test_func(self):
         obj = self.get_object()
         return self.request.user == obj.owner
@@ -88,6 +88,8 @@ class TaskCreateView(BaseCreateView):
     fields = ["title", "description", "status", "priority", "assigned_to"]
     template_name = "tasks/task_form.html"
     success_url = reverse_lazy("task-list")
+
+
 
 
 class TaskUpdateView(BaseUpdateView):
