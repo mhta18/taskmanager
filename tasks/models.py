@@ -62,6 +62,9 @@ class BugReport(BaseItem):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='reported')
     expected_result = models.TextField(blank=True)
 
+    class Meta:
+        unique_together = ('owner', 'title')
+
     def __str__(self):
         return f"Bug: {self.title} ({self.severity})"
 
@@ -78,6 +81,9 @@ class Note(BaseItem):
     note_type = models.CharField(max_length=20, choices=NOTE_TYPES, default='general')
     is_pinned = models.BooleanField(default=False)
     tags = models.CharField(max_length=100, blank=True)
+    
+    class Meta:
+        unique_together = ('owner', 'title')
 
     def __str__(self):
         return f"Note: {self.title} ({self.note_type})"

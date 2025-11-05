@@ -17,11 +17,11 @@ class TaskSerializer(BaseItemSerializer):
     class Meta(BaseItemSerializer.Meta):
         model = Task
         fields = BaseItemSerializer.Meta.fields + ['status', 'priority', 'assigned_to', 'owner']
-        read_only_fields = BaseItemSerializer.Meta.read_only_fields + ['owner']
+        read_only_fields = BaseItemSerializer.Meta.read_only_fields 
         validators = [
             UniqueTogetherValidator(
                 queryset=Task.objects.all(),
-                fields=['title'], 
+                fields=['owner','title'], 
                 message="You already have a task with this title."
             )
         ]
@@ -31,11 +31,11 @@ class BugReportSerializer(BaseItemSerializer):
     class Meta(BaseItemSerializer.Meta):
         model = BugReport
         fields = BaseItemSerializer.Meta.fields + ['severity', 'status', 'expected_result', 'owner']
-        read_only_fields = BaseItemSerializer.Meta.read_only_fields + ['owner']
+        read_only_fields = BaseItemSerializer.Meta.read_only_fields 
         validators = [
             UniqueTogetherValidator(
                 queryset=BugReport.objects.all(),
-                fields=['title'], 
+                fields=['owner','title'], 
                 message="You already have a bug report with this title."
             )
         ]
@@ -45,11 +45,11 @@ class NoteSerializer(BaseItemSerializer):
     class Meta(BaseItemSerializer.Meta):
         model = Note
         fields = BaseItemSerializer.Meta.fields + ['note_type', 'is_pinned', 'tags', 'owner']
-        read_only_fields = BaseItemSerializer.Meta.read_only_fields + ['owner']
+        read_only_fields = BaseItemSerializer.Meta.read_only_fields 
         validators = [
             UniqueTogetherValidator(
                 queryset=Note.objects.all(),
-                fields=['title'], 
+                fields=['owner','title'], 
                 message="You already have a note with this title."
             )
         ]

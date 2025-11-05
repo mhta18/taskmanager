@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Task, BugReport, Note
 from django.db.models import Q
+from django.db import IntegrityError
 import logging
 
 
@@ -42,9 +43,18 @@ class BaseCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
-        response = super().form_valid(form)
-        logger.info(f"User '{self.request.user}' created {self.model.__name__} titled '{form.instance.title}'")
-        return response
+        try:
+            response = super().form_valid(form)
+            logger.info(
+                f"User '{self.request.user}' created {self.model.__name__} titled '{form.instance.title}'"
+            )
+            return response
+        except IntegrityError:
+            form.add_error('title', 'You already have an item with this title.')
+            logger.warning(
+                f"User '{self.request.user}' tried to create a duplicate {self.model.__name__} titled '{form.instance.title}'"
+            )
+            return self.form_invalid(form)
 
 
 class BaseUpdateView(BaseOwnerMixin, UpdateView):
